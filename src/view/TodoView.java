@@ -133,7 +133,7 @@ public class TodoView {
 
         // todoService.deleteTodo 호출
         todoService.deleteTodo(date, index);
-        System.out.println("삭제 완료!"); // 삭제 안되는 경우에도 출력해야 하는지??
+        System.out.println("삭제 완료!"); 
     }
 
     // 완료 처리
