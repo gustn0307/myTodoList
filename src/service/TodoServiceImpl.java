@@ -17,7 +17,6 @@ public class TodoServiceImpl implements TodoService {
     @Override
     public void addTodo(String date, String time, String task) {
         Todo todo = new Todo(time, task, false); // 전달받은 인자를 데이터로 가지는 객체 생성
-
         todoRepository.add(date, todo); // repository에 전달
     }
 

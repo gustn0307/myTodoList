@@ -33,7 +33,7 @@ public class TodoView {
                     deleteTodo(); // 구현 완료
                     break;
                 case 4:
-                    completeTodo();
+                    completeTodo(); // 구현 완료
                     break;
                 case 5:
                     printByDate(); // 구현 완료
@@ -74,8 +74,7 @@ public class TodoView {
         System.out.print("할 일 입력: ");
         String task = sc.next();
 
-        //todoService.addTodo 호출
-        todoService.addTodo(date, time, task);
+        todoService.addTodo(date, time, task); //todoService.addTodo 호출
 
         System.out.println("저장 완료!");
     }
@@ -106,8 +105,7 @@ public class TodoView {
         System.out.print("새 할 일 입력: ");
         String task = sc.next();
 
-        // todoService.updateTodo 호출
-        todoService.updateTodo(date, index, time, task);
+        todoService.updateTodo(date, index, time, task); // todoService.updateTodo 호출
         System.out.println("수정 완료!");
     }
 
@@ -131,9 +129,8 @@ public class TodoView {
             return; // 범위 유효하지 않으면 메서드 안내 문구 출력 후 메서드 종료
         }
 
-        // todoService.deleteTodo 호출
-        todoService.deleteTodo(date, index);
-        System.out.println("삭제 완료!"); 
+        todoService.deleteTodo(date, index); // todoService.deleteTodo 호출
+        System.out.println("삭제 완료!");
     }
 
     // 완료 처리
@@ -156,8 +153,7 @@ public class TodoView {
             return; // 범위 유효하지 않으면 메서드 안내 문구 출력 후 메서드 종료
         }
 
-        // todoService.completeTodo 호출
-        todoService.completeTodo(date, index);
+        todoService.completeTodo(date, index); // todoService.completeTodo 호출
         System.out.println("완료 처리 완료!");
     }
 
