@@ -1,9 +1,10 @@
 package vo;
 
+// 할 일 데이터를 담는 객체 클래스
 public class Todo {
-    private String time;
-    private String task;
-    private boolean completed;
+    private String time; // 시간
+    private String task; // 할 일 내용
+    private boolean completed; // 완료 여부
 
     public Todo() {
     }

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+// 사용자 입력과 화면 출력 담당
 public class TodoView {
     private final Scanner sc;
     private final TodoService todoService;
@@ -49,6 +50,7 @@ public class TodoView {
         }
     }
 
+    // 사용자 메뉴 출력
     private void printMenu() {
         System.out.println("\n===== TODO LIST =====");
         System.out.println("1. 할 일 입력");
@@ -61,6 +63,7 @@ public class TodoView {
         System.out.print("번호 선택: ");
     }
 
+    // 할 일 추가
     private void addTodo() {
         System.out.print("날짜 입력(예: 2026-04-14): ");
         String date = sc.next();
@@ -72,11 +75,14 @@ public class TodoView {
         String task = sc.next();
 
         //todoService.addTodo 호출
+        todoService.addTodo(date, time, task);
+
         System.out.println("저장 완료!");
     }
 
+    // 할 일 수정
     private void updateTodo() {
-        System.out.print("날짜 입력: ");
+        System.out.print("수정할 날짜 입력: ");
         String date = sc.next();
 
         List<Todo> list = todoService.getTodosByDate(date);
@@ -87,7 +93,7 @@ public class TodoView {
         }
 
         System.out.print("수정할 번호 선택: ");
-        int index = sc.nextInt() - 1;
+        int index = sc.nextInt() - 1; // Map<String, List<Todo>> 에서 List<Todo>의 인덱스 번호
 
         System.out.print("새 시간 입력: ");
         String time = sc.next();
@@ -99,8 +105,9 @@ public class TodoView {
         System.out.println("수정 완료!");
     }
 
+    // 할 일 삭제
     private void deleteTodo() {
-        System.out.print("날짜 입력: ");
+        System.out.print("삭제할 할 일이 있는 날짜 입력: ");
         String date = sc.next();
 
         List<Todo> list = todoService.getTodosByDate(date);
@@ -117,8 +124,9 @@ public class TodoView {
         System.out.println("삭제 완료!");
     }
 
+    // 완료 처리
     private void completeTodo() {
-        System.out.print("날짜 입력: ");
+        System.out.print("완료 처리 할 일이 있는 날짜 입력: ");
         String date = sc.next();
 
         List<Todo> list = todoService.getTodosByDate(date);
@@ -135,6 +143,7 @@ public class TodoView {
         System.out.println("완료 처리 완료!");
     }
 
+    // 일별 출력
     private void printByDate() {
         System.out.print("날짜 입력: ");
         String date = sc.next();
@@ -143,6 +152,7 @@ public class TodoView {
         printList(date, list);
     }
 
+    // 전체 출력
     private void printAll() {
         Map<String, List<Todo>> all = todoService.getAllTodos();
 
