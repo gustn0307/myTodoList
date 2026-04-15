@@ -151,7 +151,13 @@ public class TodoView {
         System.out.print("완료 처리할 번호 선택: ");
         int index = sc.nextInt() - 1;
 
+        if (index < 0 || index > (list.size() - 1)) { // index 값 유효범위인지 확인
+            System.out.println("유효하지 않은 번호입니다. 1 ~ " + list.size() + "에서 하나를 입력하시오.");
+            return; // 범위 유효하지 않으면 메서드 안내 문구 출력 후 메서드 종료
+        }
+
         // todoService.completeTodo 호출
+        todoService.completeTodo(date, index);
         System.out.println("완료 처리 완료!");
     }
 

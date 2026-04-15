@@ -67,6 +67,6 @@ public class TodoRepositoryImpl implements TodoRepository {
 
     @Override
     public void complete(String date, int index) {
-
+        todoMap.get(date).get(index).setCompleted(true); // 완료 처리
     }
 }
