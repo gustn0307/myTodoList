@@ -24,22 +24,22 @@ public class TodoView {
 
             switch (choice) {
                 case 1:
-                    addTodo();
+                    addTodo(); // 구현 완료
                     break;
                 case 2:
-                    updateTodo();
+                    updateTodo(); // 구현 완료
                     break;
                 case 3:
-                    deleteTodo();
+                    deleteTodo(); // 구현 완료
                     break;
                 case 4:
                     completeTodo();
                     break;
                 case 5:
-                    printByDate();
+                    printByDate(); // 구현 완료
                     break;
                 case 6:
-                    printAll();
+                    printAll(); // 구현 완료
                     break;
                 case 7:
                     System.out.println("프로그램 종료");
@@ -89,12 +89,16 @@ public class TodoView {
         printList(date, list); // 해당 날짜의 할 일 목록 출력
 
         if (list == null || list.isEmpty()) {
-            System.out.println("해당 날짜의 할 일이 없어 수정할 수 없습니다.");
             return;
         }
 
         System.out.print("수정할 번호 선택: ");
         int index = sc.nextInt() - 1; // Map<날짜, 할 일 목록>에서 할 일 목록의 인덱스 번호
+
+        if (index < 0 || index > (list.size() - 1)) { // index 값 유효범위인지 확인
+            System.out.println("유효하지 않은 번호입니다. 1 ~ " + list.size() + "에서 하나를 입력하시오.");
+            return; // 범위 유효하지 않으면 메서드 안내 문구 출력 후 메서드 종료
+        }
 
         System.out.print("새 시간 입력: ");
         String time = sc.next();
@@ -112,18 +116,24 @@ public class TodoView {
         System.out.print("삭제할 할 일이 있는 날짜 입력: ");
         String date = sc.next();
 
-        List<Todo> list = todoService.getTodosByDate(date);
+        List<Todo> list = todoService.getTodosByDate(date); // 입력 받은 날짜의 할 일 목록
         printList(date, list);
 
-        if (list == null || list.isEmpty()) {
+        if (list == null || list.isEmpty()) { // 해당 날짜의 할 일 목록 비어있으면 안내 문구 출력 후 메서드 종료
             return;
         }
 
         System.out.print("삭제할 번호 선택: ");
         int index = sc.nextInt() - 1;
 
+        if (index < 0 || index > (list.size() - 1)) { // index 값 유효범위인지 확인
+            System.out.println("유효하지 않은 번호입니다. 1 ~ " + list.size() + "에서 하나를 입력하시오.");
+            return; // 범위 유효하지 않으면 메서드 안내 문구 출력 후 메서드 종료
+        }
+
         // todoService.deleteTodo 호출
-        System.out.println("삭제 완료!");
+        todoService.deleteTodo(date, index);
+        System.out.println("삭제 완료!"); // 삭제 안되는 경우에도 출력해야 하는지??
     }
 
     // 완료 처리
@@ -171,7 +181,8 @@ public class TodoView {
 
     private void printList(String date, List<Todo> list) {
         if (list == null || list.isEmpty()) {
-            System.out.println("해당 날짜의 할 일이 없습니다.");
+            System.out.println("\n[" + date + "]");
+            System.out.println("해당 날짜에 할 일이 없습니다.");
             return;
         }
 

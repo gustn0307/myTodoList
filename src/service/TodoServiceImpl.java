@@ -28,7 +28,7 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public Map<String, List<Todo>> getAllTodos() {
-        return Map.of();
+        return todoRepository.findAll();
     }
 
     @Override
@@ -39,7 +39,7 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public void deleteTodo(String date, int index) {
-
+        todoRepository.delete(date, index);
     }
 
     @Override
