@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 // 실제 데이터를 저장하고 조회하는 계층
-public class TodoRepositoryImpl implements TodoRepository{
+public class TodoRepositoryImpl implements TodoRepository {
     private final Map<String, List<Todo>> todoMap = new HashMap<>(); // 내부 저장소
 
     @Override
     public void add(String date, Todo todo) {
-        if(todoMap.containsKey(date)){ // 날짜 존재하면 해당 날짜에 할 일 추가
+        if (todoMap.containsKey(date)) { // 날짜 존재하면 해당 날짜에 할 일 추가
             todoMap.get(date).add(todo); // 해당 날짜의 할 일 List에 할 일 추가
             System.out.println(todoMap); // 테스트 출력
             return; // 추가하고 메서드 종료
@@ -30,7 +30,7 @@ public class TodoRepositoryImpl implements TodoRepository{
     public List<Todo> findByDate(String date) {
         List<Todo> todos = new ArrayList<>();
         for (String key : todoMap.keySet()) { // 순회해서 해당 날짜의 할 일 List 반환
-            if(date.equals(key)){ // 일치하는 날짜 있으면 리스트에 추가
+            if (date.equals(key)) { // 일치하는 날짜 있으면 리스트에 추가
                 return todoMap.get(key); // 일치하는 날짜의 할 일 리스트 반환
             }
         }
@@ -49,7 +49,15 @@ public class TodoRepositoryImpl implements TodoRepository{
 
     @Override
     public void update(String date, int index, Todo todo) {
-
+        // View에서 이미 해당 날짜에 할 일 목록이 있는지 확인 후 넘어왔기 때문에
+        // for-each문으로 순회해서 확인과정 없이 index 범위 유효한지만 체크하고 수정 작업 해주면 된다.
+        // 해당 날짜(date)의 할 일 목록 중 index와 일치하는 할 일을 수정
+        if (todoMap.get(date).get(index) != null) { // index가 유효한지 확인
+            todoMap.get(date).set(index, todo); // 할 일 목록(todoMap.get(key))의 해당 인덱스의 값을 변경
+        } else { // 할 일 목록 중 index에 해당하는 할 일이 없으면 안내 문구 출력 후 종료
+            System.out.println("유효하지 않은 번호입니다. 1 ~ " + todoMap.get(date).size() + "중 하나를 입력하시오.");
+        }
+        System.out.println(todoMap); // 테스트용 출력
     }
 
     @Override

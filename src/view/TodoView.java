@@ -86,14 +86,15 @@ public class TodoView {
         String date = sc.next();
 
         List<Todo> list = todoService.getTodosByDate(date);
-        printList(date, list);
+        printList(date, list); // 해당 날짜의 할 일 목록 출력
 
         if (list == null || list.isEmpty()) {
+            System.out.println("해당 날짜의 할 일이 없어 수정할 수 없습니다.");
             return;
         }
 
         System.out.print("수정할 번호 선택: ");
-        int index = sc.nextInt() - 1; // Map<String, List<Todo>> 에서 List<Todo>의 인덱스 번호
+        int index = sc.nextInt() - 1; // Map<날짜, 할 일 목록>에서 할 일 목록의 인덱스 번호
 
         System.out.print("새 시간 입력: ");
         String time = sc.next();
@@ -102,6 +103,7 @@ public class TodoView {
         String task = sc.next();
 
         // todoService.updateTodo 호출
+        todoService.updateTodo(date, index, time, task);
         System.out.println("수정 완료!");
     }
 
