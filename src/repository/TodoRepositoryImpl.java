@@ -15,7 +15,6 @@ public class TodoRepositoryImpl implements TodoRepository {
     public void add(String date, Todo todo) {
         if (todoMap.containsKey(date)) { // 날짜 존재하면 해당 날짜에 할 일 추가
             todoMap.get(date).add(todo); // 해당 날짜의 할 일 List에 할 일 추가
-            System.out.println(todoMap); // 테스트 출력
             return; // 추가하고 메서드 종료
         }
         // 날짜 존재하지 않으면 해당 날짜를 키로 가지는 할 일 추가
@@ -23,7 +22,6 @@ public class TodoRepositoryImpl implements TodoRepository {
         // 컬렉션은 Optional 사용하지 않는다. (단일 객체 조회는 Optional 사용함)
         todoMap.put(date, new ArrayList<>()); // 날짜를 추가하고 null 방지를 위해 빈 리스트를 추가(실무 규칙)
         todoMap.get(date).add(todo); // 새로 생긴 날짜에 할 일 추가
-        System.out.println(todoMap); // 테스트 출력
     }
 
     @Override
@@ -52,8 +50,6 @@ public class TodoRepositoryImpl implements TodoRepository {
         // for-each문으로 순회해서 목록 유무 여부 확인 과정 없이 수정 작업만 해주면 된다.
         // 해당 날짜(date)의 할 일 목록 중 index와 일치하는 할 일을 수정
         todoMap.get(date).set(index, todo); // 할 일 목록(todoMap.get(key))의 해당 인덱스의 값을 변경
-
-        System.out.println(todoMap); // 테스트용 출력
     }
 
     @Override
@@ -61,8 +57,6 @@ public class TodoRepositoryImpl implements TodoRepository {
         // View에서 이미 해당 날짜에 할 일 목록이 있는지, index 유효범위 확인 후 넘어왔기 때문에
         // for-each문으로 순회해서 목록 유무 여부 확인 과정 없이 삭제 작업만 해주면 된다.
         todoMap.get(date).remove(index); // 삭제
-
-        System.out.println(todoMap); // 테스트용 출력
     }
 
     @Override
