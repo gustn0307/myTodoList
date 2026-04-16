@@ -56,7 +56,11 @@ public class TodoRepositoryImpl implements TodoRepository {
     public void delete(String date, int index) {
         // View에서 이미 해당 날짜에 할 일 목록이 있는지, index 유효범위 확인 후 넘어왔기 때문에
         // for-each문으로 순회해서 목록 유무 여부 확인 과정 없이 삭제 작업만 해주면 된다.
-        todoMap.get(date).remove(index); // 삭제
+        todoMap.get(date).remove(index); // 해당 날짜의 할 일 삭제
+        
+        if (todoMap.get(date).isEmpty()) { // 삭제 후 할 일 목록이 비어있으면
+            todoMap.remove(date);    // 해당 날짜도 삭제
+        }
     }
 
     @Override
