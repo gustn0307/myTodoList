@@ -99,6 +99,11 @@ public class TodoView {
             return; // 범위 유효하지 않으면 메서드 안내 문구 출력 후 메서드 종료
         }
 
+        if (list.get(index).isCompleted()) { // 할 일 목록 중 선택한 할 일이 이미 완료되어 있다면 메서드 종료
+            System.out.println("이미 완료된 일입니다. 다시 선택해주세요");
+            return;
+        }
+
         System.out.print("새 시간 입력: ");
         String time = sc.next();
 
